@@ -1,16 +1,16 @@
 {
     "version": "0.0.1",
-    "name": "Atlas/3dbittensor",
-    "description": "3D Bittensor Reward Structure Experiment from Atlas",
+    "name": "404-Repo/3DAssetSubnet",
+    "description": "3D Bittensor Reward Structure Experiment from 3D Assets creation from 404",
     "expressions": [
         {
             "module": "src/func",
-            "type": "AtlasRewardModel"
+            "type": "RewardModel"
         }
     ],
     "run": {
         "module": "src/func",
-        "type": "AtlasRewardModel"
+        "type": "RewardModel"
     },
     "dependencies": []
 }

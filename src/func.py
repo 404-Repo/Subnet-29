@@ -7,7 +7,7 @@ from symai import Symbol, Expression, Metadata
 from symai.components import Embed, Metric
 
 
-class AtlasRewardModel(Expression):
+class RewardModel(Expression):
     def __init__(self, in_memory=True, metric='jaccard', aggregation: Union['sum', 'mean', 'median'] = 'sum'):
         super().__init__()
         self.in_memory   = in_memory
@@ -76,6 +76,6 @@ class AtlasRewardModel(Expression):
 
 
 if __name__ == '__main__':
-    expr = AtlasRewardModel()
+    expr = RewardModel()
     res = expr('assets/img/cat.jpeg')
     print(res)
