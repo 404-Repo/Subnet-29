@@ -1,0 +1,16 @@
+{
+    "version": "0.0.1",
+    "name": "Atlas/3dbittensor",
+    "description": "3D Bittensor Reward Structure Experiment from Atlas",
+    "expressions": [
+        {
+            "module": "src/func",
+            "type": "AtlasRewardModel"
+        }
+    ],
+    "run": {
+        "module": "src/func",
+        "type": "AtlasRewardModel"
+    },
+    "dependencies": []
+}

@@ -1,0 +1,7 @@
+PyOpenGL
+PyOpenGL_accelerate
+Pillow
+glfw
+pygltflib
+pygltf
+f3d
