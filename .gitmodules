@@ -1,3 +1,9 @@
+[submodule "llava-cpp-server"]
+	path = llava-cpp-server
+	url = https://github.com/trzy/llava-cpp-server
+[submodule "llama.cpp"]
+	path = llama.cpp
+	url = https://github.com/ggerganov/llama.cpp
 [submodule "shap-e"]
 	path = shap-e
 	url = https://github.com/openai/shap-e
