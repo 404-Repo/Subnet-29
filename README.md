@@ -39,6 +39,16 @@ Download one of `ggml-model-*.gguf` and `mmproj-model-f16.gguf` from [here](http
 bin/llava-server -m ggml-model-q5_k.gguf --mmproj mmproj-model-f16.gguf
 ```
 
+### Configure Neural-Captioning Engine
+Set the `.symai/symai.config.json` `CAPTION_ENGINE_MODEL` property to `llavacpp`:
+```json
+{
+  ...
+  "CAPTION_ENGINE_MODEL": "llavacpp"
+  ...
+}
+```
+
 ### Read the Docs:
 Open the [Docs.ipynb](Docs.ipynb) notebook to read a summary of the Bittensor repo.
 
