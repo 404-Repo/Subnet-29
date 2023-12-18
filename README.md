@@ -6,8 +6,8 @@
 
 Clone the repository:
 ```bash
-git clone https://github.com/404-Repo/3DAssetSubnet.git
-cd 3DAssetSubnet
+git clone https://github.com/404-Repo/Subnet-29.git
+cd Subnet-29
 ```
 
 Install Python Environment:
