@@ -40,7 +40,7 @@ bin/llava-server -m ggml-model-q5_k.gguf --mmproj mmproj-model-f16.gguf
 ```
 
 ### Configure Neural-Captioning Engine
-Run `symwzd` in your terminal to create a default configuration for `symbolicai`.
+Run `symwzd` in your terminal to create a default configuration for `symbolicai`. 
 Set the `.symai/symai.config.json` `CAPTION_ENGINE_MODEL` property to `llavacpp`:
 ```json
 {
@@ -49,6 +49,7 @@ Set the `.symai/symai.config.json` `CAPTION_ENGINE_MODEL` property to `llavacpp`
   ...
 }
 ```
+See further details [here](https://github.com/ExtensityAI/symbolicai).
 
 ### Read the Docs:
 Open the [Docs.ipynb](Docs.ipynb) notebook to read a summary of the Bittensor repo.
