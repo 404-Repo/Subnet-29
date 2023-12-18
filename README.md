@@ -4,9 +4,20 @@
 
 ### Install
 
+Clone the repository:
+```bash
+git clone https://github.com/404-Repo/3DAssetSubnet.git
+cd 3DAssetSubnet
+```
+
 Install Python Environment:
 ```bash
 pip install -r requirements.txt
+```
+
+Install shap-e:
+```bash
+pip install git+https://github.com/openai/shap-e.git
 ```
 
 Install submodules:
@@ -40,7 +51,7 @@ bin/llava-server -m ggml-model-q5_k.gguf --mmproj mmproj-model-f16.gguf
 ```
 
 ### Configure Neural-Captioning Engine
-Run `symwzd` in your terminal to create a default configuration for `symbolicai`. 
+Run `symwzd` in your terminal to create a default configuration for `symbolicai`.
 Set the `.symai/symai.config.json` `CAPTION_ENGINE_MODEL` property to `llavacpp`:
 ```json
 {
@@ -51,8 +62,13 @@ Set the `.symai/symai.config.json` `CAPTION_ENGINE_MODEL` property to `llavacpp`
 ```
 See further details [here](https://github.com/ExtensityAI/symbolicai).
 
+### Install embeddings extensions:
+```bash
+sympkg i ExtensityAI/embeddings
+```
+
 ### Read the Docs:
-Open the [Docs.ipynb](Docs.ipynb) notebook to read a summary of the Bittensor repo.
+Open the [Docs.ipynb](Docs.ipynb) notebook to read a summary of the Bittensor repository.
 
 ### Try it out:
 Open the Jupyter notebook [Experiment.ipynb](Experiment.ipynb) and run the cells to run initial experiments for the 3D asset extension.

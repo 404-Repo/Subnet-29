@@ -8,7 +8,7 @@ from symai.components import Embed, Metric
 
 
 class RewardModel(Expression):
-    def __init__(self, in_memory=True, metric='jaccard', aggregation: Union['sum', 'mean', 'median'] = 'sum'):
+    def __init__(self, in_memory=True, metric='cosine', aggregation: Union['sum', 'mean', 'median'] = 'sum'):
         super().__init__()
         self.in_memory   = in_memory
         self.sim_metric  = metric
@@ -16,7 +16,7 @@ class RewardModel(Expression):
         self.metric      = Metric(normalize=True)
         self.model       = Interface('llava')
         self.clip        = Interface('clip')
-        self.embed       = Import('ExtensityAI/embeddings')
+        self.embed       = Interface('ExtensityAI/embeddings')
         #self.embed       = Embed()
 
     def _dynamic_cache(self, references: List[str]):

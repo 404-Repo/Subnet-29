@@ -19,7 +19,7 @@ class ShapE(Expression):
             self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.xm          = load_model('transmitter', device=self.device)
         self.image_model = load_model('image300M', device=self.device)
-        #self.text_model  = load_model('text300M', device=self.device)
+        self.text_model  = load_model('text300M', device=self.device)
         self.diffusion   = diffusion_from_config(load_config('diffusion'))
 
     def forward(self, query: str, render_mode: Union['nerf', 'stf'] = 'nerf', *args, **kwargs):
@@ -47,7 +47,7 @@ class ShapE(Expression):
             clip_denoised=True,
             use_fp16=True,
             use_karras=True,
-            karras_steps=15,
+            karras_steps=64,
             sigma_min=1e-3,
             sigma_max=160,
             s_churn=0,
