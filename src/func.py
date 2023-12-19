@@ -2,13 +2,13 @@ import numpy as np
 
 from typing import List, Union
 
-from symai import core_ext, Interface, Import
+from symai import core_ext, Interface
 from symai import Symbol, Expression, Metadata
-from symai.components import Embed, Metric
+from symai.components import Metric
 
 
 class RewardModel(Expression):
-    def __init__(self, in_memory=True, metric='cosine', aggregation: Union['sum', 'mean', 'median'] = 'sum'):
+    def __init__(self, in_memory=True, metric='cosine', aggregation: Union['sum', 'mean', 'median', 'none'] = 'sum'):
         super().__init__()
         self.in_memory   = in_memory
         self.sim_metric  = metric
@@ -17,7 +17,6 @@ class RewardModel(Expression):
         self.model       = Interface('llava')
         self.clip        = Interface('clip')
         self.embed       = Interface('ExtensityAI/embeddings')
-        #self.embed       = Embed()
 
     def _dynamic_cache(self, references: List[str]):
         @core_ext.cache(in_memory=self.in_memory)
@@ -31,9 +30,9 @@ class RewardModel(Expression):
             return list(emb)
         return _embed(self)
 
-    def forward(self, images: List[str], references: List[str],  *args, **kwargs):
+    def forward(self, images: List[str], refs_images: List[str], refs_texts: List[str], *args, **kwargs):
         # embed and cache references
-        reference_embs = self._dynamic_cache(references)
+        reference_embs = self._dynamic_cache(refs_images)
 
         # embed images
         img_embeddings = {}
@@ -60,19 +59,34 @@ class RewardModel(Expression):
                 agg_func = np.mean
             elif self.aggregation == 'median':
                 agg_func = np.median
+            elif self.aggregation == 'none':
+                agg_func = lambda x: x
             else:
                 raise ValueError(f'Aggregation function "{self.aggregation}" is not supported.')
             score = agg_func(sim.value)
             scores.append(score)
             metas.append(sim._metadata)
 
-        sym = self.metric(scores)
-        sym._metadata = Metadata()
-        sym._metadata.scores        = scores
-        sym._metadata.similarities  = joined_similarities
-        sym._metadata.results       = metas
+        sym1  = self.metric(scores)
+        sym1._metadata = Metadata()
+        sym1._metadata.scores        = scores
+        sym1._metadata.similarities  = joined_similarities
+        sym1._metadata.results       = metas
 
-        return sym
+        sym2     = self.clip(images, refs_texts)
+        indices  = sym2.value.argmax(axis=1)
+        max_vals = sym2.value.max(axis=1)
+        max_vals[indices == len(refs_texts) - 1] = 0
+        s_comb   = (sym1.value.squeeze() + max_vals)
+        rank     = np.exp(s_comb) / np.sum(np.exp(s_comb))
+
+        res      = Symbol(rank)
+        res._metadata        = Metadata()
+        res._metadata.sym1   = sym1
+        res._metadata.sym2   = sym2
+        res._metadata.scores = s_comb
+        res._metadata.rank   = rank
+        return res
 
 
 if __name__ == '__main__':
