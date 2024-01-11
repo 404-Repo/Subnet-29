@@ -12,8 +12,8 @@ from symai import Expression
 
 
 class ShapE(Expression):
-    def __init__(self, device: torch.device = None):
-        super().__init__()
+    def __init__(self, device: torch.device = None, **kwargs):
+        super().__init__(**kwargs)
         self.device = device
         if self.device is None:
             self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
