@@ -8,8 +8,8 @@ from symai.components import Metric
 
 
 class RewardModel(Expression):
-    def __init__(self, in_memory=True, metric='cosine', aggregation: Union['sum', 'mean', 'median', 'none'] = 'sum'):
-        super().__init__()
+    def __init__(self, in_memory=True, metric='cosine', aggregation: Union['sum', 'mean', 'median', 'none'] = 'sum', **kwargs):
+        super().__init__(**kwargs)
         self.in_memory   = in_memory
         self.sim_metric  = metric
         self.aggregation = aggregation
